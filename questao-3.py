@@ -1,4 +1,6 @@
 import requests
+import json
+from json import dumps
 
 #CONSULTANDO A API DO STAR WARS - PERSONAGENS
 lista = []
@@ -38,11 +40,6 @@ while num <= 9:
     ''' Após executar 1 página, incrementa 1 para verificar a prox página'''
     num = num + 1
 
-#APRESENTANDO A RESPOSTA
-print("Os personagens que aparecem em 4 ou mais filmes são: ", lista)
-
-
-
 
 #CONSULTANDO A API DO STAR WARS - PERSONAGENS
 lista2 = []
@@ -81,5 +78,22 @@ while num3 <= 6:
     ''' Após executar 1 página, incrementa 1 para verificar a prox página'''
     num3 = num3 + 1
 
-#APRESENTANDO A RESPOSTA
-print("Os planetas que possuem 5 ou mais moradores são: ", lista2)
+
+### Gravando as respostas em arquivo JSON
+''' 
+Convertendo os objetos em strings.
+'''
+
+resposta1 = {"Personagens que aparecem em 4 ou mais filmes:" : lista }
+resposta1_string = json.dumps(resposta1)
+
+resposta2 = {"Planetas que possuem 5 ou mais moradores:" : lista2}
+resposta2_string = json.dumps(resposta2)
+
+''' 
+Criando e gravando as respostas no arquivo JSON.
+'''
+file = open('resposta.json', 'wb')
+file.write(resposta1_string.encode())
+file.write(resposta2_string.encode())
+file.close()
